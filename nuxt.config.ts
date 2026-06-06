@@ -7,5 +7,12 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui',
-  ]
+  ],
+
+  css: ['~/assets/css/main.css'],
+
+  // Авто-импорт компонентов без префикса поддиректории
+  components: [
+    { path: '~/components', pathPrefix: false },
+  ],
 })
