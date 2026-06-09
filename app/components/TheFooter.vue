@@ -1,243 +1,92 @@
 <script setup lang="ts">
-const SUPPORT_TEXT = 'Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» мероприятия «Платформа университетского технологического предпринимательства» федерального проекта «Технологии».'
-
-const FOOTER_LINKS = [
-  { label: 'О проекте', href: '#about' },
-  { label: 'Деревья', href: '#trees' },
-  { label: 'Наши фермы', href: '#farms' },
-  { label: 'Контакты', href: '#contact' },
-] as const
+import { NAV_LINKS } from '~/constants/navigation'
+import { COMPANY_NAME, LOGO_ICON, SUPPORT_TEXT } from '~/constants/company'
+import { CONTACT_EMAIL, CONTACT_PHONE } from '~/constants/contact'
 
 const currentYear = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="the-footer">
-    <div class="the-footer__container">
-      <div class="the-footer__top">
-        <div class="the-footer__brand">
-          <a href="#" class="the-footer__logo">
-            <span>🌲</span>
-            <span>Карбоновая ферма</span>
+  <footer class="bg-primary-dark text-white/85 mt-20">
+    <div class="max-w-[1280px] mx-auto px-6 pt-12 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 md:gap-12 mb-10">
+        <div>
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 no-underline text-white font-bold text-lg mb-3 select-none hover:text-white/80 transition-colors"
+          >
+            <span>{{ LOGO_ICON }}</span>
+            <span>{{ COMPANY_NAME }}</span>
           </a>
-          <p class="the-footer__tagline">
+          <p class="text-sm leading-normal text-white/60 max-w-[28rem]">
             Создаём леса, поглощающие углерод. Для планеты и будущих поколений.
           </p>
         </div>
 
-        <nav class="the-footer__nav" aria-label="Навигация в подвале">
-          <h3 class="the-footer__nav-title">
+        <nav aria-label="Навигация в подвале">
+          <h3 class="text-xs font-semibold uppercase tracking-[0.08em] text-white/50 mb-3">
             Навигация
           </h3>
-          <ul class="the-footer__nav-list">
-            <li v-for="link in FOOTER_LINKS" :key="link.href">
-              <a :href="link.href" class="the-footer__nav-link">{{ link.label }}</a>
+          <ul class="list-none p-0 m-0 flex flex-col gap-2">
+            <li v-for="link in NAV_LINKS" :key="link.href">
+              <a
+                :href="link.href"
+                class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white transition-colors"
+              >{{ link.label }}</a>
             </li>
           </ul>
         </nav>
 
-        <div class="the-footer__contact">
-          <h3 class="the-footer__nav-title">
+        <div class="flex flex-col gap-2">
+          <h3 class="text-xs font-semibold uppercase tracking-[0.08em] text-white/50 mb-1">
             Контакты
           </h3>
-          <a href="tel:+78001234567" class="the-footer__contact-link">
-            📞 8 (800) 123-45-67
+          <a
+            :href="CONTACT_PHONE.href"
+            class="text-white/75 no-underline text-sm cursor-pointer hover:text-white transition-colors"
+          >
+            {{ CONTACT_PHONE.icon }} {{ CONTACT_PHONE.value }}
           </a>
-          <a href="mailto:info@carbonfarm.ru" class="the-footer__contact-link">
-            ✉️ info@carbonfarm.ru
+          <a
+            :href="CONTACT_EMAIL.href"
+            class="text-white/75 no-underline text-sm cursor-pointer hover:text-white transition-colors"
+          >
+            {{ CONTACT_EMAIL.icon }} {{ CONTACT_EMAIL.value }}
           </a>
         </div>
       </div>
 
-      <div class="the-footer__divider" />
+      <div class="h-px bg-white/10 mb-6" />
 
-      <div class="the-footer__support">
-        <div class="the-footer__support-logos">
-          <div class="the-footer__support-logo-wrap">
+      <div class="flex flex-col md:flex-row items-start gap-8 mb-6">
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="bg-white rounded-lg px-3 py-2 flex items-center justify-center">
             <NuxtImg
               src="/fond-sodeystviya-innovatsiyam.png"
               alt="Фонд содействия инновациям"
               loading="lazy"
-              class="the-footer__support-logo"
+              class="h-32 w-auto object-contain block"
             />
           </div>
-          <div class="the-footer__support-logo-wrap">
+          <div class="bg-white rounded-lg px-3 py-2 flex items-center justify-center">
             <NuxtImg
               src="/platforma-predprinimatelstva.png"
               alt="Платформа университетского технологического предпринимательства"
               loading="lazy"
-              class="the-footer__support-logo"
+              class="h-32 w-auto object-contain block"
             />
           </div>
         </div>
-        <p class="the-footer__support-text">
+        <p class="text-xs leading-relaxed text-white/50">
           {{ SUPPORT_TEXT }}
         </p>
       </div>
 
-      <div class="the-footer__bottom">
-        <p class="the-footer__copyright">
-          © {{ currentYear }} Карбоновая ферма. Все права защищены.
+      <div class="pt-4 border-t border-white/10">
+        <p class="text-xs text-white/40 text-center">
+          © {{ currentYear }} {{ COMPANY_NAME }}. Все права защищены.
         </p>
       </div>
     </div>
   </footer>
 </template>
-
-<style scoped>
-.the-footer {
-  background: var(--color-primary-dark);
-  color: rgba(255, 255, 255, 0.85);
-  margin-top: 5rem;
-}
-
-.the-footer__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 2rem;
-}
-
-.the-footer__top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 3rem;
-  margin-bottom: 2.5rem;
-}
-
-.the-footer__logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: white;
-  font-weight: var(--font-weight-bold);
-  font-size: 1.125rem;
-  margin-bottom: 0.75rem;
-  user-select: none;
-}
-
-.the-footer__logo:hover {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.the-footer__tagline {
-  font-size: var(--font-size-body-sm);
-  line-height: var(--line-height-normal);
-  color: rgba(255, 255, 255, 0.6);
-  max-width: 28rem;
-}
-
-.the-footer__nav-title {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.75rem;
-}
-
-.the-footer__nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.the-footer__nav-link {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  font-size: var(--font-size-body-sm);
-  cursor: pointer;
-  user-select: none;
-  transition: color 0.2s;
-}
-
-.the-footer__nav-link:hover {
-  color: white;
-}
-
-.the-footer__contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.the-footer__contact-link {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  font-size: var(--font-size-body-sm);
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.the-footer__contact-link:hover {
-  color: white;
-}
-
-.the-footer__divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.12);
-  margin-bottom: 1.5rem;
-}
-
-.the-footer__support {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.the-footer__support-logos {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.the-footer__support-logo-wrap {
-  background: white;
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.the-footer__support-logo {
-  height: 8rem;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.the-footer__support-text {
-  font-size: var(--font-size-caption);
-  line-height: var(--line-height-relaxed);
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.the-footer__bottom {
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.the-footer__copyright {
-  font-size: var(--font-size-caption);
-  color: rgba(255, 255, 255, 0.4);
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .the-footer__top {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .the-footer__support {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-</style>

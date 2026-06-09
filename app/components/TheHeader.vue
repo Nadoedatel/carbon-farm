@@ -1,11 +1,9 @@
 <script setup lang="ts">
-/** Навигационные ссылки с привязкой к секциям */
-const NAV_LINKS = [
-  { label: 'О проекте', href: '#about', sectionId: 'about' },
-  { label: 'Деревья', href: '#trees', sectionId: 'trees' },
-  { label: 'Наши фермы', href: '#farms', sectionId: 'farms' },
-  { label: 'Контакты', href: '#contact', sectionId: 'contact' },
-] as const
+import { NAV_LINKS, SECTION_IDS } from '~/constants/navigation'
+import { COMPANY_NAME, CTA_CONSULT_LABEL, LOGO_ICON } from '~/constants/company'
+
+const INTERSECTION_THRESHOLD = 0.3
+const MENU_OPEN_ARIA_LABEL = 'Открыть меню'
 
 const isMenuOpen = ref(false)
 const activeSection = ref('')
@@ -35,7 +33,7 @@ onMounted(() => {
         })
       },
       // Секция считается активной когда её верхняя треть в зоне видимости
-      { threshold: 0.3 },
+      { threshold: INTERSECTION_THRESHOLD },
     )
 
     observer.observe(el)
@@ -49,191 +47,63 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="the-header">
-    <div class="the-header__container">
-      <a href="#" class="the-header__logo">
-        <span class="the-header__logo-icon">🌲</span>
-        <span class="the-header__logo-text">Карбоновая ферма</span>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-surface-dark">
+    <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center gap-8">
+      <a
+        href="#"
+        class="flex items-center gap-2 no-underline text-primary-dark font-bold text-lg shrink-0 select-none hover:text-primary transition-colors"
+      >
+        <span class="text-2xl">{{ LOGO_ICON }}</span>
+        <span>{{ COMPANY_NAME }}</span>
       </a>
 
-      <nav class="the-header__nav" :class="{ 'the-header__nav_open': isMenuOpen }">
+      <nav
+        :class="isMenuOpen
+          ? 'flex flex-col absolute top-16 left-0 right-0 bg-white px-6 py-4 border-b border-surface-dark shadow-lg gap-1 z-50'
+          : 'hidden md:flex md:items-center md:gap-1 md:flex-1'"
+      >
         <a
           v-for="link in NAV_LINKS"
           :key="link.href"
           :href="link.href"
-          class="the-header__nav-link"
-          :class="{ 'the-header__nav-link_active': activeSection === link.sectionId }"
+          class="px-3 py-1.5 rounded-lg text-gray-600 no-underline text-sm select-none cursor-pointer transition-colors hover:text-primary hover:bg-surface"
+          :class="{ 'text-primary bg-surface font-semibold': activeSection === link.sectionId }"
           @click="handleNavClick"
         >
           {{ link.label }}
         </a>
       </nav>
 
-      <UButton
-        class="the-header__cta"
-        color="primary"
-        size="md"
-        as="a"
-        href="#contact"
-        @click="handleNavClick"
-      >
-        Получить консультацию
-      </UButton>
+      <div class="hidden md:flex shrink-0">
+        <VButton
+          as="a"
+          :href="`#${SECTION_IDS.contact}`"
+          size="sm"
+          @click="handleNavClick"
+        >
+          {{ CTA_CONSULT_LABEL }}
+        </VButton>
+      </div>
 
       <button
-        class="the-header__burger"
-        :class="{ 'the-header__burger_open': isMenuOpen }"
+        class="md:hidden flex flex-col gap-[5px] p-1.5 bg-transparent border-none cursor-pointer shrink-0 ml-auto"
         :aria-expanded="isMenuOpen"
-        aria-label="Открыть меню"
+        :aria-label="MENU_OPEN_ARIA_LABEL"
         @click="handleMenuToggle"
       >
-        <span class="the-header__burger-line" />
-        <span class="the-header__burger-line" />
-        <span class="the-header__burger-line" />
+        <span
+          class="block w-6 h-0.5 bg-primary-dark rounded transition duration-200 origin-center"
+          :class="{ 'translate-y-[7px] rotate-45': isMenuOpen }"
+        />
+        <span
+          class="block w-6 h-0.5 bg-primary-dark rounded transition duration-200"
+          :class="{ 'opacity-0 scale-x-0': isMenuOpen }"
+        />
+        <span
+          class="block w-6 h-0.5 bg-primary-dark rounded transition duration-200 origin-center"
+          :class="{ '-translate-y-[7px] -rotate-45': isMenuOpen }"
+        />
       </button>
     </div>
   </header>
 </template>
-
-<style scoped>
-.the-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--color-surface-dark);
-}
-
-.the-header__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.the-header__logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: var(--color-primary-dark);
-  font-weight: var(--font-weight-bold);
-  font-size: 1.125rem;
-  user-select: none;
-  flex-shrink: 0;
-}
-
-.the-header__logo:hover {
-  color: var(--color-primary);
-}
-
-.the-header__logo-icon {
-  font-size: 1.5rem;
-}
-
-.the-header__nav {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  flex: 1;
-}
-
-.the-header__nav-link {
-  padding: 0.4rem 0.75rem;
-  border-radius: 0.5rem;
-  color: #4a4a4a;
-  text-decoration: none;
-  font-size: var(--font-size-body-sm);
-  user-select: none;
-  cursor: pointer;
-  transition: color 0.2s, background 0.2s;
-}
-
-.the-header__nav-link:hover {
-  color: var(--color-primary);
-  background: var(--color-surface);
-}
-
-.the-header__nav-link_active {
-  color: var(--color-primary);
-  background: var(--color-surface);
-  font-weight: var(--font-weight-semibold);
-}
-
-.the-header__cta {
-  flex-shrink: 0;
-}
-
-/* ===== БУРГЕР ===== */
-.the-header__burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0.4rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.the-header__burger-line {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--color-primary-dark);
-  border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  transform-origin: center;
-}
-
-/* Анимация в крестик */
-.the-header__burger_open .the-header__burger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.the-header__burger_open .the-header__burger-line:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.the-header__burger_open .the-header__burger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-@media (max-width: 768px) {
-  .the-header__burger {
-    display: flex;
-  }
-
-  .the-header__cta {
-    display: none;
-  }
-
-  .the-header__nav {
-    display: none;
-    position: absolute;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: white;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--color-surface-dark);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    gap: 0.25rem;
-  }
-
-  .the-header__nav_open {
-    display: flex;
-  }
-
-  .the-header__nav-link {
-    width: 100%;
-    padding: 0.75rem 1rem;
-  }
-}
-</style>
