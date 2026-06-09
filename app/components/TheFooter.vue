@@ -71,6 +71,10 @@ const currentYear = new Date().getFullYear()
               src="/fond-sodeystviya-innovatsiyam.png"
               alt="Фонд содействия инновациям"
               loading="lazy"
+              width="240"
+              height="116"
+              sizes="240px"
+              quality="80"
               class="h-32 w-auto object-contain block"
             />
           </div>
@@ -79,6 +83,10 @@ const currentYear = new Date().getFullYear()
               src="/platforma-predprinimatelstva.png"
               alt="Платформа университетского технологического предпринимательства"
               loading="lazy"
+              width="200"
+              height="160"
+              sizes="200px"
+              quality="80"
               class="h-32 w-auto object-contain block"
             />
           </div>

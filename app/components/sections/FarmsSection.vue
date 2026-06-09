@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { FARMS } from '~/constants/farms'
 
 const SECTION_EYEBROW = 'Портфолио'
@@ -10,6 +11,36 @@ const UNIT_KG = 'кг'
 const LABEL_TREES = 'деревьев'
 const LABEL_AREA = 'площадь'
 const LABEL_CO2 = 'CO₂ в год'
+
+const lightboxFarmId = ref<string | null>(null)
+const lightboxIndex = ref<number>(0)
+
+const lightboxFarm = computed(() =>
+  FARMS.find(f => f.id === lightboxFarmId.value) ?? null,
+)
+
+const lightboxImages = computed<string[]>(() =>
+  lightboxFarm.value?.images ?? [],
+)
+
+const lightboxAltBase = computed<string>(() =>
+  lightboxFarm.value ? `Ферма «${lightboxFarm.value.name}»` : '',
+)
+
+const isLightboxOpen = computed<boolean>(() => lightboxFarmId.value !== null)
+
+function handleOpenLightbox(farmId: string, index: number): void {
+  lightboxFarmId.value = farmId
+  lightboxIndex.value = index
+}
+
+function handleCloseLightbox(): void {
+  lightboxFarmId.value = null
+}
+
+function handleUpdateLightboxIndex(index: number): void {
+  lightboxIndex.value = index
+}
 </script>
 
 <template>
@@ -60,20 +91,37 @@ const LABEL_CO2 = 'CO₂ в год'
 
           <div class="flex flex-row md:flex-col gap-4 md:gap-5 min-w-[10rem] bg-surface rounded-xl px-5 py-4 self-stretch md:self-start">
             <div class="text-left md:text-right">
-              <span class="block text-2xl font-bold text-primary leading-tight">{{ formatNumber(farm.treesCount) }}</span>
+              <span class="block text-lg md:text-2xl font-bold text-primary leading-tight">{{ formatNumber(farm.treesCount) }}</span>
               <span class="text-xs text-gray-500">{{ LABEL_TREES }}</span>
             </div>
             <div class="text-left md:text-right">
-              <span class="block text-2xl font-bold text-primary leading-tight">{{ farm.area }} {{ UNIT_HA }}</span>
+              <span class="block text-lg md:text-2xl font-bold text-primary leading-tight">{{ farm.area }} {{ UNIT_HA }}</span>
               <span class="text-xs text-gray-500">{{ LABEL_AREA }}</span>
             </div>
             <div class="text-left md:text-right">
-              <span class="block text-2xl font-bold text-accent leading-tight">{{ formatNumber(farm.co2Annual) }} {{ UNIT_KG }}</span>
+              <span class="block text-lg md:text-2xl font-bold text-accent leading-tight">{{ formatNumber(farm.co2Annual) }} {{ UNIT_KG }}</span>
               <span class="text-xs text-gray-500">{{ LABEL_CO2 }}</span>
             </div>
           </div>
+
+          <VImageSlider
+            v-if="farm.images?.length"
+            :images="farm.images"
+            :alt-base="`Ферма «${farm.name}»`"
+            class="col-span-full"
+            @open-lightbox="handleOpenLightbox(farm.id, $event)"
+          />
         </article>
       </div>
     </div>
+
+    <VImageLightbox
+      :images="lightboxImages"
+      :current-index="lightboxIndex"
+      :is-open="isLightboxOpen"
+      :alt-base="lightboxAltBase"
+      @close="handleCloseLightbox"
+      @update:current-index="handleUpdateLightboxIndex"
+    />
   </section>
 </template>

@@ -12,6 +12,12 @@ export const FARMS: IFarm[] = [
     co2Annual: 6000,
     description: 'Проект создан в партнёрстве с местным аграрным предприятием для компенсации промышленных выбросов. Лес посажен студентами-биологами третьего курса КГУ при поддержке гранта.',
     species: ['Сосна обыкновенная'],
+    images: [
+      '/farms/carbon-312/1.jpg',
+      '/farms/carbon-312/2.jpg',
+      '/farms/carbon-312/3.jpg',
+      '/farms/carbon-312/4.jpg',
+    ],
   },
   {
     id: 'lipetsk-forest',

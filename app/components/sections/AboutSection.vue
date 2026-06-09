@@ -36,7 +36,8 @@ const HOW_IT_WORKS_TITLE = 'Как это работает'
         <NuxtImg
           src="/forest-bg.jpg"
           class="absolute inset-0 w-full h-full object-cover"
-          sizes="sm:100vw lg:1280px"
+          sizes="sm:100vw md:100vw lg:1280px"
+          quality="75"
           loading="lazy"
           alt=""
           aria-hidden="true"

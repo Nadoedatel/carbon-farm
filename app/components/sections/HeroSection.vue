@@ -50,6 +50,9 @@ const compensationResult = computed<ICompensationResult | null>(() => {
       class="absolute inset-0 size-full object-cover"
       loading="eager"
       preload
+      sizes="sm:100vw md:100vw lg:100vw xl:100vw"
+      quality="75"
+      fetchpriority="high"
     />
     <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 via-primary/80 to-primary-light/70" />
 
@@ -65,7 +68,7 @@ const compensationResult = computed<ICompensationResult | null>(() => {
         <p class="text-base leading-relaxed text-white/85 mb-8 max-w-[32rem]">
           {{ HERO_DESCRIPTION }}
         </p>
-        <div class="flex gap-4 flex-wrap">
+        <div class="flex gap-4 flex-col md:flex-row md:flex-wrap">
           <VButton
             as="a"
             :href="`#${SECTION_IDS.contact}`"

@@ -10,9 +10,9 @@ useSeoMeta({
 <template>
   <div class="index-page">
     <HeroSection />
-    <AboutSection />
-    <TreesSection />
-    <FarmsSection />
-    <ContactSection />
+    <LazyAboutSection />
+    <LazyTreesSection />
+    <LazyFarmsSection />
+    <LazyContactSection />
   </div>
 </template>

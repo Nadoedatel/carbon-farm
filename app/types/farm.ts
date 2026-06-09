@@ -11,4 +11,6 @@ export interface IFarm {
   co2Annual: number
   description: string
   species: string[]
+  /** Пути к фотографиям фермы из /public (опционально) */
+  images?: string[]
 }
