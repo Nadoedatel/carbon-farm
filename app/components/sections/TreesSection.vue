@@ -2,6 +2,9 @@
 import { TREES } from '~/constants/trees'
 import { SECTION_IDS } from '~/constants/navigation'
 
+const SECTION_EYEBROW = 'Каталог'
+const SECTION_TITLE = 'Виды деревьев и цены'
+const SECTION_DESCRIPTION = 'Подбираем состав деревьев под климатические условия вашего региона и задачи фермы. Цены указаны за одно дерево с посадкой.'
 const TREE_ICON = '🌳'
 const CO2_ICON = '💨'
 const LIFESPAN_ICON = '⏳'
@@ -9,15 +12,16 @@ const UNIT_KG = 'кг'
 const LABEL_CO2_PER_YEAR = 'CO₂ в год'
 const LABEL_LIFESPAN = 'жизнеспособность'
 const CTA_ORDER_LABEL = 'Заказать'
+const CTA_CONSULT_LABEL = 'Получить бесплатную консультацию'
 </script>
 
 <template>
   <section id="trees" class="py-12 md:py-20 bg-white">
     <div class="max-w-[1280px] mx-auto px-6">
       <VSectionHeader
-        label="Каталог"
-        title="Виды деревьев и цены"
-        description="Подбираем состав деревьев под климатические условия вашего региона и задачи фермы. Цены указаны за одно дерево с посадкой."
+        :label="SECTION_EYEBROW"
+        :title="SECTION_TITLE"
+        :description="SECTION_DESCRIPTION"
       />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -92,7 +96,7 @@ const CTA_ORDER_LABEL = 'Заказать'
           :href="`#${SECTION_IDS.contact}`"
           size="md"
         >
-          Получить бесплатную консультацию
+          {{ CTA_CONSULT_LABEL }}
         </VButton>
       </div>
     </div>

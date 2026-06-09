@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { NAV_LINKS, SECTION_IDS } from '~/constants/navigation'
-import { COMPANY_NAME, CTA_CONSULT_LABEL, LOGO_ICON } from '~/constants/company'
+import { COMPANY_NAME, CTA_CONSULT_LABEL } from '~/constants/company'
 
 const INTERSECTION_THRESHOLD = 0.3
-const MENU_OPEN_ARIA_LABEL = 'Открыть меню'
+const ARIA_LABEL_OPEN = 'Открыть меню'
+const ARIA_LABEL_CLOSE = 'Закрыть меню'
 
 const isMenuOpen = ref(false)
 const activeSection = ref('')
@@ -51,10 +52,17 @@ onUnmounted(() => {
     <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center gap-8">
       <a
         href="#"
-        class="flex items-center gap-2 no-underline text-primary-dark font-bold text-lg shrink-0 select-none hover:text-primary transition-colors"
+        class="flex items-center gap-2 no-underline text-primary-dark font-bold text-lg shrink-0 select-none hover:text-primary focus-visible:outline-none focus-visible:text-primary transition-colors"
       >
-        <span class="text-2xl">{{ LOGO_ICON }}</span>
-        <span>{{ COMPANY_NAME }}</span>
+        <NuxtImg
+          src="/logo_without_name.svg"
+          :alt="COMPANY_NAME"
+          width="120"
+          height="40"
+          loading="eager"
+          preload
+          class="h-10 w-auto object-contain"
+        />
       </a>
 
       <nav
@@ -66,7 +74,7 @@ onUnmounted(() => {
           v-for="link in NAV_LINKS"
           :key="link.href"
           :href="link.href"
-          class="px-3 py-1.5 rounded-lg text-gray-600 no-underline text-sm select-none cursor-pointer transition-colors hover:text-primary hover:bg-surface"
+          class="px-3 py-1.5 rounded-lg text-gray-600 no-underline text-sm select-none cursor-pointer transition-colors hover:text-primary hover:bg-surface focus-visible:outline-none focus-visible:text-primary focus-visible:bg-surface"
           :class="{ 'text-primary bg-surface font-semibold': activeSection === link.sectionId }"
           @click="handleNavClick"
         >
@@ -88,7 +96,7 @@ onUnmounted(() => {
       <button
         class="md:hidden flex flex-col gap-[5px] p-1.5 bg-transparent border-none cursor-pointer shrink-0 ml-auto"
         :aria-expanded="isMenuOpen"
-        :aria-label="MENU_OPEN_ARIA_LABEL"
+        :aria-label="isMenuOpen ? ARIA_LABEL_CLOSE : ARIA_LABEL_OPEN"
         @click="handleMenuToggle"
       >
         <span

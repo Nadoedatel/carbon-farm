@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { FARMS } from '~/constants/farms'
 
+const SECTION_EYEBROW = 'Портфолио'
+const SECTION_TITLE = 'Реализованные фермы'
+const SECTION_DESCRIPTION = 'Каждая ферма — это живой проект, который продолжает работать на климат. Смотрите, что мы уже сделали.'
 const LOCATION_ICON = '📍'
 const UNIT_HA = 'га'
 const UNIT_KG = 'кг'
@@ -13,9 +16,9 @@ const LABEL_CO2 = 'CO₂ в год'
   <section id="farms" class="py-12 md:py-20 bg-surface">
     <div class="max-w-[1280px] mx-auto px-6">
       <VSectionHeader
-        label="Портфолио"
-        title="Реализованные фермы"
-        description="Каждая ферма — это живой проект, который продолжает работать на климат. Смотрите, что мы уже сделали."
+        :label="SECTION_EYEBROW"
+        :title="SECTION_TITLE"
+        :description="SECTION_DESCRIPTION"
       />
 
       <div class="flex flex-col gap-6">
@@ -55,18 +58,18 @@ const LABEL_CO2 = 'CO₂ в год'
             </div>
           </div>
 
-          <div class="flex flex-row md:flex-col gap-4 md:gap-5 min-w-[10rem]">
+          <div class="flex flex-row md:flex-col gap-4 md:gap-5 min-w-[10rem] bg-surface rounded-xl px-5 py-4 self-stretch md:self-start">
             <div class="text-left md:text-right">
-              <span class="block text-2xl font-bold text-primary-dark leading-tight">{{ formatNumber(farm.treesCount) }}</span>
-              <span class="text-xs text-gray-400">{{ LABEL_TREES }}</span>
+              <span class="block text-2xl font-bold text-primary leading-tight">{{ formatNumber(farm.treesCount) }}</span>
+              <span class="text-xs text-gray-500">{{ LABEL_TREES }}</span>
             </div>
             <div class="text-left md:text-right">
-              <span class="block text-2xl font-bold text-primary-dark leading-tight">{{ farm.area }} {{ UNIT_HA }}</span>
-              <span class="text-xs text-gray-400">{{ LABEL_AREA }}</span>
+              <span class="block text-2xl font-bold text-primary leading-tight">{{ farm.area }} {{ UNIT_HA }}</span>
+              <span class="text-xs text-gray-500">{{ LABEL_AREA }}</span>
             </div>
             <div class="text-left md:text-right">
-              <span class="block text-2xl font-bold text-primary leading-tight">{{ formatNumber(farm.co2Annual) }} {{ UNIT_KG }}</span>
-              <span class="text-xs text-gray-400">{{ LABEL_CO2 }}</span>
+              <span class="block text-2xl font-bold text-accent leading-tight">{{ formatNumber(farm.co2Annual) }} {{ UNIT_KG }}</span>
+              <span class="text-xs text-gray-500">{{ LABEL_CO2 }}</span>
             </div>
           </div>
         </article>

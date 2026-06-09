@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CONTACT_METHODS } from '~/constants/contact'
+import { HERO_STATS } from '~/constants/about'
 
 /** Данные формы обратной связи */
 interface IContactForm {
@@ -31,6 +32,8 @@ const ERROR_NAME_INVALID = 'Имя может содержать только б
 const ERROR_PHONE_EMPTY = 'Введите номер телефона'
 const ERROR_PHONE_INVALID = 'Введите корректный номер (+7 или 8 и 10 цифр)'
 const ERROR_EMAIL_INVALID = 'Введите корректный email'
+
+const STATS_LABEL = 'Наши результаты'
 
 const SECTION_EYEBROW = 'Связаться'
 const SECTION_TITLE = 'Заказать консультацию'
@@ -105,6 +108,10 @@ function validateForm(): boolean {
   return !errors.name && !errors.phone && !errors.email
 }
 
+function handleSendAgain(): void {
+  isSubmitted.value = false
+}
+
 async function handleSubmit(): Promise<void> {
   if (!validateForm()) return
 
@@ -127,13 +134,13 @@ async function handleSubmit(): Promise<void> {
         :description="SECTION_DESCRIPTION"
       />
 
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-16 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-16">
         <div class="flex flex-col gap-4">
           <a
             v-for="method in CONTACT_METHODS"
             :key="method.id"
             :href="method.href"
-            class="flex items-center gap-4 px-6 py-5 bg-surface border border-surface-dark rounded-[0.875rem] no-underline cursor-pointer select-none transition-[box-shadow,transform,border-color] duration-200 hover:shadow-[0_4px_16px_rgba(15,61,37,0.1)] hover:-translate-y-px hover:border-primary-light"
+            class="flex items-center gap-4 px-6 py-5 bg-surface border border-surface-dark rounded-[0.875rem] no-underline cursor-pointer select-none transition-[box-shadow,transform,border-color] duration-200 hover:shadow-[0_4px_16px_rgba(15,61,37,0.1)] hover:-translate-y-px hover:border-primary-light focus-visible:outline-none focus-visible:border-primary focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,#1a5c38_15%,transparent)]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -144,6 +151,28 @@ async function handleSubmit(): Promise<void> {
               <span class="text-xs text-gray-400">{{ method.hint }}</span>
             </div>
           </a>
+
+          <div class="flex flex-col px-6 py-5 bg-surface border border-surface-dark rounded-[0.875rem] grow">
+            <span class="text-xs font-semibold uppercase tracking-[0.06em] text-gray-400 mb-4">
+              {{ STATS_LABEL }}
+            </span>
+            <div class="flex flex-col divide-y divide-surface-dark">
+              <div
+                v-for="stat in HERO_STATS"
+                :key="stat.label"
+                class="flex items-center gap-4 py-4 first:pt-0 last:pb-0"
+              >
+                <span
+                  class="text-3xl shrink-0 select-none"
+                  aria-hidden="true"
+                >{{ stat.icon }}</span>
+                <div class="flex flex-col">
+                  <span class="text-2xl font-bold text-primary-dark leading-tight tabular-nums">{{ stat.value }}</span>
+                  <span class="text-xs text-gray-400 mt-0.5">{{ stat.label }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <form
@@ -223,7 +252,7 @@ async function handleSubmit(): Promise<void> {
           </p>
           <VButton
             variant="outline"
-            @click="isSubmitted = false"
+            @click="handleSendAgain"
           >
             {{ BTN_SEND_AGAIN }}
           </VButton>

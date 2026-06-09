@@ -36,7 +36,7 @@ export const STEPS = [
 
 /** Статистика для hero-секции */
 export const HERO_STATS = [
-  { value: '2 500+', label: 'деревьев посажено' },
-  { value: '3', label: 'фермы реализовано' },
-  { value: '45 200', label: 'кг CO₂ в год' },
+  { value: '2 500+', label: 'деревьев посажено', icon: '🌳' },
+  { value: '3', label: 'фермы реализовано', icon: '🏡' },
+  { value: '45 200', label: 'кг CO₂ в год', icon: '🌫️' },
 ] as const

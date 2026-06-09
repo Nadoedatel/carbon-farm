@@ -66,6 +66,8 @@ const inputClasses = computed(() => [
       :class="inputClasses"
       :placeholder="placeholder"
       :rows="rows"
+      :required="required || undefined"
+      :aria-required="required || undefined"
       @input="emit('update:modelValue', ($event.target as HTMLTextAreaElement).value)"
       @blur="emit('blur')"
     />
@@ -77,6 +79,8 @@ const inputClasses = computed(() => [
       :type="inputType"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
+      :required="required || undefined"
+      :aria-required="required || undefined"
       @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       @blur="emit('blur')"
     >

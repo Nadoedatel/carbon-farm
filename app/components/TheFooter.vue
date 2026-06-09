@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NAV_LINKS } from '~/constants/navigation'
-import { COMPANY_NAME, LOGO_ICON, SUPPORT_TEXT } from '~/constants/company'
+import { COMPANY_NAME, SUPPORT_TEXT } from '~/constants/company'
 import { CONTACT_EMAIL, CONTACT_PHONE } from '~/constants/contact'
 
 const currentYear = new Date().getFullYear()
@@ -13,10 +13,16 @@ const currentYear = new Date().getFullYear()
         <div>
           <a
             href="#"
-            class="inline-flex items-center gap-2 no-underline text-white font-bold text-lg mb-3 select-none hover:text-white/80 transition-colors"
+            class="inline-flex items-center gap-2 no-underline text-white font-bold text-lg mb-3 select-none hover:text-white/80 focus-visible:outline-none focus-visible:text-white/80 transition-colors"
           >
-            <span>{{ LOGO_ICON }}</span>
-            <span>{{ COMPANY_NAME }}</span>
+            <NuxtImg
+              src="/logo_without_name.svg"
+              :alt="COMPANY_NAME"
+              width="120"
+              height="40"
+              loading="lazy"
+              class="h-10 w-auto object-contain brightness-0 invert"
+            />
           </a>
           <p class="text-sm leading-normal text-white/60 max-w-[28rem]">
             Создаём леса, поглощающие углерод. Для планеты и будущих поколений.
@@ -31,7 +37,7 @@ const currentYear = new Date().getFullYear()
             <li v-for="link in NAV_LINKS" :key="link.href">
               <a
                 :href="link.href"
-                class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white transition-colors"
+                class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
               >{{ link.label }}</a>
             </li>
           </ul>
@@ -43,13 +49,13 @@ const currentYear = new Date().getFullYear()
           </h3>
           <a
             :href="CONTACT_PHONE.href"
-            class="text-white/75 no-underline text-sm cursor-pointer hover:text-white transition-colors"
+            class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
           >
             {{ CONTACT_PHONE.icon }} {{ CONTACT_PHONE.value }}
           </a>
           <a
             :href="CONTACT_EMAIL.href"
-            class="text-white/75 no-underline text-sm cursor-pointer hover:text-white transition-colors"
+            class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
           >
             {{ CONTACT_EMAIL.icon }} {{ CONTACT_EMAIL.value }}
           </a>
@@ -76,6 +82,7 @@ const currentYear = new Date().getFullYear()
               class="h-32 w-auto object-contain block"
             />
           </div>
+
         </div>
         <p class="text-xs leading-relaxed text-white/50">
           {{ SUPPORT_TEXT }}
