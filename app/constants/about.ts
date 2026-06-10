@@ -2,25 +2,25 @@
 export const BENEFITS = [
   {
     id: 'co2',
-    icon: '🌡️',
+    icon: 'lucide:thermometer',
     title: 'Поглощение CO₂',
     text: 'Деревья поглощают углекислый газ и выделяют кислород. Один гектар леса связывает до 5 тонн CO₂ в год.',
   },
   {
     id: 'biodiversity',
-    icon: '🦋',
+    icon: 'lucide:bird',
     title: 'Биоразнообразие',
     text: 'Лесные угодья создают среду обитания для сотен видов животных, птиц и насекомых.',
   },
   {
     id: 'economy',
-    icon: '💰',
+    icon: 'lucide:coins',
     title: 'Карбоновые кредиты',
     text: 'Владельцы фермы получают углеродные единицы, которые можно продавать предприятиям для компенсации выбросов.',
   },
   {
     id: 'longterm',
-    icon: '📅',
+    icon: 'lucide:calendar',
     title: 'Долгосрочный эффект',
     text: 'Лес продолжает работать десятки лет — это устойчивый вклад в климатическую повестку.',
   },
@@ -36,7 +36,7 @@ export const STEPS = [
 
 /** Статистика для hero-секции */
 export const HERO_STATS = [
-  { value: '2 500+', label: 'деревьев посажено', icon: '🌳' },
-  { value: '3', label: 'фермы реализовано', icon: '🏡' },
-  { value: '45 200', label: 'кг CO₂ в год', icon: '🌫️' },
+  { value: '2 500+', label: 'деревьев посажено', icon: 'lucide:tree-pine' },
+  { value: '3', label: 'фермы реализовано', icon: 'lucide:home' },
+  { value: '45 200', label: 'кг CO₂ в год', icon: 'lucide:wind' },
 ] as const

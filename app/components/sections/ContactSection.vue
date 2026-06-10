@@ -126,7 +126,7 @@ async function handleSubmit(): Promise<void> {
 </script>
 
 <template>
-  <section id="contact" class="py-12 md:py-20 bg-white">
+  <section id="contact" class="py-12 md:py-20 bg-surface">
     <div class="max-w-[1280px] mx-auto px-6">
       <VSectionHeader
         :label="SECTION_EYEBROW"
@@ -140,11 +140,11 @@ async function handleSubmit(): Promise<void> {
             v-for="method in CONTACT_METHODS"
             :key="method.id"
             :href="method.href"
-            class="flex items-center gap-4 px-6 py-5 bg-surface border border-surface-dark rounded-[0.875rem] no-underline cursor-pointer select-none transition-[box-shadow,transform,border-color] duration-200 hover:shadow-[0_4px_16px_rgba(15,61,37,0.1)] hover:-translate-y-px hover:border-primary-light focus-visible:outline-none focus-visible:border-primary focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,#1a5c38_15%,transparent)]"
+            class="flex items-center gap-4 px-6 py-5 bg-white border border-surface-dark rounded-[0.875rem] no-underline cursor-pointer select-none transition-[box-shadow,transform,border-color] duration-200 hover:shadow-[0_4px_16px_rgba(15,61,37,0.1)] hover:-translate-y-px hover:border-primary-light focus-visible:outline-none focus-visible:border-primary focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,#1a5c38_15%,transparent)]"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span class="text-[2.25rem] shrink-0">{{ method.icon }}</span>
+            <Icon :name="method.icon" :size="30" class="shrink-0 text-primary" aria-hidden="true" />
             <div class="flex flex-col">
               <span class="text-xs font-semibold uppercase tracking-[0.06em] text-gray-400 mb-0.5">{{ method.title }}</span>
               <span class="text-base font-bold text-primary-dark mb-0.5">{{ method.value }}</span>
@@ -152,7 +152,7 @@ async function handleSubmit(): Promise<void> {
             </div>
           </a>
 
-          <div class="flex flex-col px-6 py-5 bg-surface border border-surface-dark rounded-[0.875rem] grow">
+          <div class="flex flex-col px-6 py-5 bg-white border border-surface-dark rounded-[0.875rem] grow">
             <span class="text-xs font-semibold uppercase tracking-[0.06em] text-gray-400 mb-4">
               {{ STATS_LABEL }}
             </span>
@@ -162,10 +162,12 @@ async function handleSubmit(): Promise<void> {
                 :key="stat.label"
                 class="flex items-center gap-4 py-4 first:pt-0 last:pb-0"
               >
-                <span
-                  class="text-3xl shrink-0 select-none"
+                <Icon
+                  :name="stat.icon"
+                  :size="30"
+                  class="shrink-0 text-primary"
                   aria-hidden="true"
-                >{{ stat.icon }}</span>
+                />
                 <div class="flex flex-col">
                   <span class="text-2xl font-bold text-primary-dark leading-tight tabular-nums">{{ stat.value }}</span>
                   <span class="text-xs text-gray-400 mt-0.5">{{ stat.label }}</span>
@@ -177,7 +179,7 @@ async function handleSubmit(): Promise<void> {
 
         <form
           v-if="!isSubmitted"
-          class="flex flex-col gap-1 p-8 bg-surface border border-surface-dark rounded-2xl"
+          class="flex flex-col gap-1 p-8 bg-white border border-surface-dark rounded-2xl"
           novalidate
           @submit.prevent="handleSubmit"
         >
@@ -241,9 +243,9 @@ async function handleSubmit(): Promise<void> {
 
         <div
           v-else
-          class="flex flex-col items-center gap-4 px-8 py-12 bg-surface border border-surface-dark rounded-2xl text-center"
+          class="flex flex-col items-center gap-4 px-8 py-12 bg-white border border-surface-dark rounded-2xl text-center"
         >
-          <span class="text-[4rem] leading-none success-icon">✅</span>
+          <Icon name="lucide:check-circle" class="w-16 h-16 text-emerald-500 success-icon" aria-hidden="true" />
           <h3 class="text-2xl font-bold text-primary-dark">
             {{ SUCCESS_TITLE }}
           </h3>

@@ -98,10 +98,7 @@ onUnmounted(() => {
           class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white cursor-pointer hover:bg-white/25 active:scale-95 transition-all duration-150 z-10"
           @click="handleClose"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
+          <Icon name="lucide:x" class="w-5 h-5" aria-hidden="true" />
         </button>
 
         <!-- Стрелка влево -->
@@ -112,9 +109,7 @@ onUnmounted(() => {
           class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white cursor-pointer hover:bg-white/25 active:scale-95 transition-all duration-150 z-10"
           @click="handlePrev"
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
+          <Icon name="lucide:chevron-left" class="w-6 h-6" aria-hidden="true" />
         </button>
 
         <!-- Изображение со слайдовой анимацией -->
@@ -137,9 +132,7 @@ onUnmounted(() => {
           class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white cursor-pointer hover:bg-white/25 active:scale-95 transition-all duration-150 z-10"
           @click="handleNext"
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
+          <Icon name="lucide:chevron-right" class="w-6 h-6" aria-hidden="true" />
         </button>
 
         <!-- Счётчик -->

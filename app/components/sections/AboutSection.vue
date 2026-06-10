@@ -22,7 +22,7 @@ const HOW_IT_WORKS_TITLE = 'Как это работает'
           :key="benefit.id"
           class="bg-white border border-surface-dark rounded-2xl p-7 text-center transition duration-300 ease-in-out hover:shadow-[0_8px_32px_rgba(26,92,56,0.12)] hover:-translate-y-1"
         >
-          <span class="text-[2.5rem] block mb-4">{{ benefit.icon }}</span>
+          <Icon :size="30" :name="benefit.icon" class="mb-4 text-primary" aria-hidden="true" />
           <h3 class="text-base font-bold text-primary-dark mb-3">
             {{ benefit.title }}
           </h3>

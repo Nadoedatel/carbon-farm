@@ -11,6 +11,7 @@ useSeoMeta({
   <div class="index-page">
     <HeroSection />
     <LazyAboutSection />
+    <LazyCarbonUnitSection />
     <LazyTreesSection />
     <LazyFarmsSection />
     <LazyContactSection />

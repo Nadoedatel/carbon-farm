@@ -5,8 +5,8 @@ import { SECTION_IDS } from '~/constants/navigation'
 const SECTION_EYEBROW = 'Каталог'
 const SECTION_TITLE = 'Виды деревьев и цены'
 const SECTION_DESCRIPTION = 'Подбираем состав деревьев под климатические условия вашего региона и задачи фермы. Цены указаны за одно дерево с посадкой.'
-const CO2_ICON = '💨'
-const LIFESPAN_ICON = '⏳'
+const CO2_ICON = 'lucide:wind'
+const LIFESPAN_ICON = 'lucide:clock'
 const UNIT_KG = 'кг'
 const LABEL_CO2_PER_YEAR = 'CO₂ в год'
 const LABEL_LIFESPAN = 'жизнеспособность'
@@ -15,7 +15,7 @@ const CTA_CONSULT_LABEL = 'Получить бесплатную консуль�
 </script>
 
 <template>
-  <section id="trees" class="py-12 md:py-20 bg-white">
+  <section id="trees" class="py-12 md:py-20 bg-surface">
     <div class="max-w-[1280px] mx-auto px-6">
       <VSectionHeader
         :label="SECTION_EYEBROW"
@@ -27,7 +27,7 @@ const CTA_CONSULT_LABEL = 'Получить бесплатную консуль�
         <article
           v-for="tree in TREES"
           :key="tree.id"
-          class="tree-card bg-surface border border-surface-dark rounded-2xl overflow-hidden flex flex-col transition-[box-shadow,transform] duration-200 hover:shadow-[0_8px_24px_rgba(26,92,56,0.12)] hover:-translate-y-0.5"
+          class="tree-card bg-white border border-surface-dark rounded-2xl overflow-hidden flex flex-col transition-[box-shadow,transform] duration-200 hover:shadow-[0_8px_24px_rgba(26,92,56,0.12)] hover:-translate-y-0.5"
         >
           <!-- Фото дерева -->
           <div class="tree-card__image relative h-44 shrink-0">
@@ -65,16 +65,16 @@ const CTA_CONSULT_LABEL = 'Получить бесплатную консуль�
             </div>
 
             <!-- Статистика -->
-            <div class="flex flex-col gap-2.5 p-4 bg-white rounded-xl border border-surface-dark">
+            <div class="flex flex-col gap-2.5 p-4 bg-surface rounded-xl border border-surface-dark">
               <div class="flex items-center gap-2.5">
-                <span class="text-xl shrink-0">{{ CO2_ICON }}</span>
+                <Icon :name="CO2_ICON" :size="30" class="shrink-0 text-primary" aria-hidden="true" />
                 <div>
                   <span class="text-sm font-semibold text-primary-dark block">{{ tree.co2PerYear }} {{ UNIT_KG }}</span>
                   <span class="text-xs text-gray-400 block">{{ LABEL_CO2_PER_YEAR }}</span>
                 </div>
               </div>
               <div class="flex items-center gap-2.5">
-                <span class="text-xl shrink-0">{{ LIFESPAN_ICON }}</span>
+                <Icon :name="LIFESPAN_ICON" :size="30" class="shrink-0 text-primary" aria-hidden="true" />
                 <div>
                   <span class="text-sm font-semibold text-primary-dark block">до {{ tree.lifespan }} лет</span>
                   <span class="text-xs text-gray-400 block">{{ LABEL_LIFESPAN }}</span>

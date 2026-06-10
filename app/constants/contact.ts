@@ -11,30 +11,30 @@ interface IContactMethod {
 /** Телефон */
 export const CONTACT_PHONE: IContactMethod = {
   id: 'phone',
-  icon: '📞',
+  icon: 'lucide:phone',
   title: 'Позвонить',
-  value: '8 (800) 123-45-67',
-  href: 'tel:+78001234567',
+  value: '8 (930) 062-67-88',
+  href: 'tel:+79300626788',
   hint: 'Бесплатно по России',
 }
 
 /** Email */
 export const CONTACT_EMAIL: IContactMethod = {
   id: 'email',
-  icon: '✉️',
+  icon: 'lucide:mail',
   title: 'Написать',
-  value: 'info@carbonfarm.ru',
-  href: 'mailto:info@carbonfarm.ru',
+  value: 'dashaprokopova.0208@mail.ru',
+  href: 'mailto:dashaprokopova.0208@mail.ru',
   hint: 'Ответим в течение дня',
 }
 
 /** Telegram */
 export const CONTACT_TELEGRAM: IContactMethod = {
   id: 'telegram',
-  icon: '💬',
+  icon: 'lucide:send',
   title: 'Telegram',
-  value: '@carbonfarm_ru',
-  href: 'https://t.me/carbonfarm_ru',
+  value: '@multik_0_0',
+  href: 'https://t.me/multik_0_0',
   hint: 'Быстрые ответы',
 }
 

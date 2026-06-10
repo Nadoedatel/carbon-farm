@@ -6,7 +6,7 @@ import { INDUSTRY_OPTIONS } from '~/constants/industries'
 import type { ICompensationResult } from '~/utils/compensation'
 
 // --- Hero copy ---
-const HERO_BADGE = '🌱 Карбоновое земледелие'
+const HERO_BADGE = 'Карбоновое земледелие'
 const HERO_TITLE_MAIN = 'Карбоновые фермы'
 const HERO_TITLE_ACCENT = 'для чистого будущего'
 const HERO_DESCRIPTION = 'Создаём управляемые лесные угодья, которые поглощают углекислый газ и компенсируют выбросы предприятий. Каждое дерево — вклад в климатическое равновесие планеты.'

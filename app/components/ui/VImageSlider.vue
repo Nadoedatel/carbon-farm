@@ -82,9 +82,7 @@ onMounted(() => {
         class="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 items-center justify-center w-9 h-9 rounded-full bg-black/40 text-white cursor-pointer hover:bg-black/60 active:scale-95 transition-all duration-150"
         @click="handlePrev"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
+        <Icon name="lucide:chevron-left" class="w-5 h-5" aria-hidden="true" />
       </button>
 
       <button
@@ -93,9 +91,7 @@ onMounted(() => {
         class="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 items-center justify-center w-9 h-9 rounded-full bg-black/40 text-white cursor-pointer hover:bg-black/60 active:scale-95 transition-all duration-150"
         @click="handleNext"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
+        <Icon name="lucide:chevron-right" class="w-5 h-5" aria-hidden="true" />
       </button>
     </template>
 

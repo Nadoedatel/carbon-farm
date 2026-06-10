@@ -49,15 +49,17 @@ const currentYear = new Date().getFullYear()
           </h3>
           <a
             :href="CONTACT_PHONE.href"
-            class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
+            class="inline-flex items-center gap-1.5 text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
           >
-            {{ CONTACT_PHONE.icon }} {{ CONTACT_PHONE.value }}
+            <Icon :name="CONTACT_PHONE.icon" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            {{ CONTACT_PHONE.value }}
           </a>
           <a
             :href="CONTACT_EMAIL.href"
-            class="text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
+            class="inline-flex items-center gap-1.5 text-white/75 no-underline text-sm cursor-pointer select-none hover:text-white focus-visible:outline-none focus-visible:text-white transition-colors"
           >
-            {{ CONTACT_EMAIL.icon }} {{ CONTACT_EMAIL.value }}
+            <Icon :name="CONTACT_EMAIL.icon" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            {{ CONTACT_EMAIL.value }}
           </a>
         </div>
       </div>
