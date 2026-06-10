@@ -24,14 +24,16 @@ const PHONE_PATTERN = /^(\+7|8)[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2
 /** Паттерн валидации email */
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
+
 const MIN_NAME_LENGTH = 2
-const SUBMIT_TIMEOUT_MS = 1000
 
 const ERROR_NAME_SHORT = `Введите имя (минимум ${MIN_NAME_LENGTH} символа)`
 const ERROR_NAME_INVALID = 'Имя может содержать только буквы, пробел и дефис'
 const ERROR_PHONE_EMPTY = 'Введите номер телефона'
 const ERROR_PHONE_INVALID = 'Введите корректный номер (+7 или 8 и 10 цифр)'
 const ERROR_EMAIL_INVALID = 'Введите корректный email'
+const ERROR_SUBMIT = 'Ошибка при отправке. Попробуйте ещё раз или свяжитесь с нами напрямую.'
 
 const STATS_LABEL = 'Наши результаты'
 
@@ -60,10 +62,13 @@ const INITIAL_FORM: IContactForm = {
 
 const INITIAL_ERRORS: IContactFormErrors = { name: '', phone: '', email: '' }
 
+const runtimeConfig = useRuntimeConfig()
+
 const form = reactive<IContactForm>({ ...INITIAL_FORM })
 const errors = reactive<IContactFormErrors>({ ...INITIAL_ERRORS })
 const isSubmitted = ref(false)
 const isLoading = ref(false)
+const submitError = ref('')
 
 /** Валидация отдельного поля при потере фокуса */
 function handleBlurName(): void {
@@ -110,18 +115,42 @@ function validateForm(): boolean {
 
 function handleSendAgain(): void {
   isSubmitted.value = false
+  submitError.value = ''
 }
 
 async function handleSubmit(): Promise<void> {
   if (!validateForm()) return
 
   isLoading.value = true
-  // Имитация отправки формы
-  await new Promise<void>(resolve => setTimeout(resolve, SUBMIT_TIMEOUT_MS))
-  isSubmitted.value = true
-  isLoading.value = false
-  Object.assign(form, INITIAL_FORM)
-  Object.assign(errors, INITIAL_ERRORS)
+  submitError.value = ''
+
+  try {
+    const response = await $fetch<{ success: boolean }>(WEB3FORMS_URL, {
+      method: 'POST',
+      body: {
+        access_key: runtimeConfig.public.web3formsKey,
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        message: form.message,
+      },
+    })
+
+    if (response.success) {
+      isSubmitted.value = true
+      Object.assign(form, INITIAL_FORM)
+      Object.assign(errors, INITIAL_ERRORS)
+    }
+    else {
+      submitError.value = ERROR_SUBMIT
+    }
+  }
+  catch {
+    submitError.value = ERROR_SUBMIT
+  }
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -235,6 +264,14 @@ async function handleSubmit(): Promise<void> {
           >
             {{ isLoading ? BTN_SUBMIT_LOADING : BTN_SUBMIT_LABEL }}
           </VButton>
+
+          <p
+            v-if="submitError"
+            class="text-xs text-red-500 text-center leading-normal mt-1"
+            role="alert"
+          >
+            {{ submitError }}
+          </p>
 
           <p class="text-xs text-gray-400 text-center leading-normal select-none mt-1">
             Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
