@@ -51,7 +51,7 @@ const compensationResult = computed<ICompensationResult | null>(() => {
       loading="eager"
       preload
       sizes="sm:100vw md:100vw lg:100vw xl:100vw"
-      quality="75"
+      quality="60"
       fetchpriority="high"
     />
     <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 via-primary/80 to-primary-light/70" />

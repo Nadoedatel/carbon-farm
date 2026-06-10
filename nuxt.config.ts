@@ -30,9 +30,10 @@ export default defineNuxtConfig({
     { path: '~/components', pathPrefix: false },
   ],
 
-  // @nuxt/image: глобальное качество и брейкпоинты для srcset
+  // @nuxt/image: глобальное качество, формат и брейкпоинты для srcset
   image: {
     quality: 75,
+    format: ['webp', 'jpg'],
     screens: {
       sm: 480,
       md: 768,
@@ -41,16 +42,23 @@ export default defineNuxtConfig({
     },
   },
 
-  // // Nitro: pre-compress + Cache-Control заголовки
-  // nitro: {
-  //   compressPublicAssets: true,
-  //   routeRules: {
-  //     '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-  //     '/trees/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-  //     '/*.jpg':    { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-  //     '/*.png':    { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-  //     '/*.svg':    { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-  //     '/':         { headers: { 'cache-control': 'public, max-age=0, must-revalidate' } },
-  //   },
-  // },
+  // @nuxt/icon: бандлим lucide на сервере — убирает клиентский JS для иконок
+  icon: {
+    serverBundle: {
+      collections: ['lucide'],
+    },
+  },
+
+  // Nitro: pre-compress + Cache-Control заголовки
+  nitro: {
+    compressPublicAssets: true,
+    routeRules: {
+      // JS/CSS assets с хешем в имени — можно кешировать навсегда
+      '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      // Все картинки через @nuxt/image попадают сюда
+      '/_ipx/**':  { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      // HTML — всегда проверяем актуальность
+      '/':         { headers: { 'cache-control': 'public, max-age=0, must-revalidate' } },
+    },
+  },
 })
