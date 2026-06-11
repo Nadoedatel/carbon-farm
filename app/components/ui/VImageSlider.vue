@@ -60,13 +60,22 @@ onMounted(() => {
 <template>
   <div ref="rootRef" class="VImageSlider relative overflow-hidden rounded-xl select-none">
     <!-- Скрытый рендер всех изображений для генерации /_ipx/-вариантов при nuxt generate -->
+    <!-- Два набора: для слайдера (600px) и для лайтбокса (1200px) -->
     <div class="hidden" aria-hidden="true">
       <NuxtImg
         v-for="img in images"
-        :key="img"
+        :key="`slider-${img}`"
         :src="img"
         alt=""
         sizes="sm:100vw md:50vw lg:600px"
+        loading="lazy"
+      />
+      <NuxtImg
+        v-for="img in images"
+        :key="`lightbox-${img}`"
+        :src="img"
+        alt=""
+        sizes="sm:100vw md:90vw lg:1200px"
         loading="lazy"
       />
     </div>
