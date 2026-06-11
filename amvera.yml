@@ -4,7 +4,6 @@ meta:
     name: npm
     version: "22"
 build:
-  additionalCommands: npm run generate
   artifacts:
     .output/public: /
 run: {}
