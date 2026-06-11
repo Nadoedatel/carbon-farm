@@ -15,7 +15,13 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/icon',
+    '@nuxtjs/sitemap',
   ],
+
+  site: {
+    url: 'https://carbon-farm-nadoedatel.amvera.io',
+    name: 'Карбоновая ферма',
+  },
 
   vite: {
     plugins: [
