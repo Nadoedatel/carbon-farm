@@ -5,5 +5,5 @@ meta:
     version: "22"
 build:
   artifacts:
-    dist/*: /
+    .output/public/*: /
 run: {}

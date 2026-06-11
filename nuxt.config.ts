@@ -51,9 +51,6 @@ export default defineNuxtConfig({
 
   // Nitro: pre-compress + Cache-Control заголовки
   nitro: {
-    output: {
-      publicDir: 'dist',
-    },
     compressPublicAssets: true,
     routeRules: {
       // JS/CSS assets с хешем в имени — можно кешировать навсегда
