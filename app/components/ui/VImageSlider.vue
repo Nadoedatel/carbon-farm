@@ -59,6 +59,18 @@ onMounted(() => {
 
 <template>
   <div ref="rootRef" class="VImageSlider relative overflow-hidden rounded-xl select-none">
+    <!-- Скрытый рендер всех изображений для генерации /_ipx/-вариантов при nuxt generate -->
+    <div class="hidden" aria-hidden="true">
+      <NuxtImg
+        v-for="img in images"
+        :key="img"
+        :src="img"
+        alt=""
+        sizes="sm:100vw md:50vw lg:600px"
+        loading="lazy"
+      />
+    </div>
+
     <!-- Изображение со слайдовой анимацией -->
     <div :class="aspectRatio" class="w-full relative overflow-hidden">
       <Transition :name="`slide-${direction}`">
