@@ -6,5 +6,5 @@ meta:
 build:
   additionalCommands: npm run generate
   artifacts:
-    .output/public/*: /
+    .output/public: /
 run: {}
