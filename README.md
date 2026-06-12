@@ -1,75 +1,76 @@
-# Nuxt Minimal Starter
+# Carbon Farm
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more
+Платформа для создания управляемых углеродных лесов. Помогает компаниям компенсировать выбросы CO₂ в соответствии с требованиями закона 296-ФЗ «Об ограничении выбросов парниковых газов».
 
-## Setup
+## Возможности
 
-Make sure to install dependencies:
+- **Калькулятор компенсации** — расчёт площади леса для нейтрализации углеродного следа компании
+- **Каталог деревьев** — 6 видов с ценами и показателями поглощения CO₂
+- **Реализованные проекты** — портфолио созданных карбоновых ферм
+- **Рынок углеродных единиц** — инструменты для продажи и регистрации углеродных квот
+- **Форма обратной связи** — лидогенерация через Web3Forms
+
+## Стек
+
+| Категория | Технология |
+|-----------|------------|
+| Фреймворк | Nuxt 4 |
+| Язык | TypeScript |
+| UI | @nuxt/ui v4 (Tailwind CSS v4 + Reka UI) |
+| Изображения | @nuxt/image v2 |
+| Иконки | @nuxt/icon v2 (Lucide) |
+| SEO | @nuxtjs/sitemap |
+| Хостинг | Amvera.io |
+
+## Структура проекта
+
+```
+app/
+├── assets/css/        # Tailwind v4 конфиг + CSS-переменные бренда
+├── components/
+│   ├── ui/            # Базовые UI-компоненты (VButton, VBadge, VFormField, ...)
+│   ├── sections/      # Секции страницы (Hero, About, Trees, Farms, Contact, ...)
+│   ├── TheHeader.vue  # Layout-компоненты
+│   └── TheFooter.vue
+├── constants/         # Данные и конфиги (деревья, фермы, навигация, ...)
+├── composables/       # Реактивная логика (useSwipe, ...)
+├── utils/             # Чистые функции (format, compensation, ...)
+├── types/             # Общие TypeScript-типы
+├── layouts/
+│   └── default.vue
+└── pages/
+    └── index.vue      # Единственная страница (SPA)
+```
+
+## Локальный запуск
 
 ```bash
-# npm
+# Установить зависимости
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Запустить dev-сервер (http://localhost:3000)
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Переменные окружения
 
-Build the application for production:
+Создайте `.env` на основе `.env.example`:
+
+```env
+# API-ключ Web3Forms для формы обратной связи
+NUXT_PUBLIC_WEB3FORMS_KEY=your_key_here
+```
+
+## Сборка и деплой
 
 ```bash
-# npm
+# Статическая генерация (для Amvera/CDN)
 npm run build
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
+# Предпросмотр сборки
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Разработка
+
+Руководство по разработке — в [CLAUDE.md](./CLAUDE.md). Охватывает: UI/UX-стандарты, код-стайл, TypeScript, Vue, CSS/Tailwind, архитектуру и SEO.
